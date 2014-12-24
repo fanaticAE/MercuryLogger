@@ -1,0 +1,16 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Log.cs">
+    <Files>
+      <File FileName="Log.cs" Line="66" Column="11" />
+      <File FileName="LogLevel.cs" Line="11" Column="12" />
+      <File FileName="LogEntry.cs" Line="28" Column="3" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches>
+    <Watch file="../../parttimestories/PartTimeStories/PartTimeStories/Network/ClientUnixSocket.cs" line="52" offsetX="830" offsetY="816" expression="requestPacket" liveUpdate="False" />
+  </MonoDevelop.Ide.DebuggingService.PinnedWatches>
+</Properties>
