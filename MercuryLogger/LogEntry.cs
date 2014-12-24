@@ -18,6 +18,7 @@ namespace MercuryLogger
 			Message = ""; 
 			Exception = null; 
 		}
+		
 		public LogEntry(LogLevel Level, string Tag, string Message, Exception Exception = null){
 			this.Level = Level; 
 			this.DateTime = DateTime.UtcNow; 
