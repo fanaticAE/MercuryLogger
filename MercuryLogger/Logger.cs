@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO; 
 using System.Collections.Generic; 
 using System.Threading; 
 
@@ -59,36 +60,47 @@ namespace MercuryLogger
 		}
 
 		public void log(LogEntry entry){
+			if (this.ImmediateStdOutLogging)
+				Console.WriteLine (entry.ToString ());
+			
 			lock (_lock) {
 				Buffer.Enqueue (entry); 
-				if (Buffer.Count >= BufferSize && this.running && !this.active) { // Also checking if not currently actively writing to file
+				if (Buffer.Count >= BufferSize && this.running && !this.active) // Also checking if not currently actively writing to file
 					doLog.Set (); 
-				}
 			}
 		}
 
 		public void flush(){
-			//TODO
+			if (running && !active) {
+				doLog.Set (); 
+			}
 		}
 
+		private void logToStdOut(LogEntry entry){
+			if (entry.Level <= HighestLevelToStdOut)
+				Console.WriteLine (entry.ToString ()); 
+		}
 
 		private void executeLogging(){
 			do {
-				this.active = true; 
-				//...
-
-				while(itemsInQueue){
-					//TODO
-					if(!ImmediateStdOutLogging && LogToStdOut){
-
-						getNextEntry(); 
-
-					}
-				}
-
-				//...
-				this.active = false; 
 				doLog.WaitOne(); 
+				this.active = true; 
+
+				//...
+				List<string> writeBuffer = new List<string>(); 
+				while(itemsInQueue()){
+					LogEntry entry = getNextEntry(); 
+
+					if(entry.Level <= HighestLevelToFile)
+						writeBuffer.Add(entry.ToString()); 
+
+					if(!ImmediateStdOutLogging && LogToStdOut)
+						logToStdOut(entry); 
+				}
+				File.WriteAllLines(FilePath,writeBuffer); 
+				//...
+
+				this.active = false; 
 			} while(running); 
 		}
 

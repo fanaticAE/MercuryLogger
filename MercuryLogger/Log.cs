@@ -7,25 +7,25 @@ namespace MercuryLogger
 {
 	public static class Log
 	{
-		private static string filePath = "log.log"; 
+		public static string FilePath { get { return logger.FilePath; } set { logger.FilePath = value; } }
+		public static bool ImmediateStdOutLogging { get { return logger.ImmediateStdOutLogging; } set { logger.ImmediateStdOutLogging = value; } }
+		public static bool LogToStdOut { get{ return logger.LogToStdOut; } set{ logger.LogToStdOut = value; } }
+		public static LogLevel HighestLevelToStdOut { get{ return logger.HighestLevelToStdOut; } set{ logger.HighestLevelToStdOut = value; } }
+		public static LogLevel HighestLevelToFile { get{ return logger.HighestLevelToFile; } set{ logger.HighestLevelToFile = value; } }
+		public static int BufferSize { get{ return logger.BufferSize; } set{ logger.BufferSize =value; } }
+		public static bool Running{ get { return logger.Running; } }
 
-
-		public static string FilePath { get { return filePath; } set { filePath = value; } }
-		public static bool ImmediateStdOutLogging { get; set; }
-		public static bool LogToStdOut { get; set; }
-		public static LogLevel HighestLevelToStdOut { get; set; }
-		public static LogLevel HighestLevelToFile { get; set; }
-		public static int BufferSize { get; set; }
-		public static bool Running{ get { } }
-
-		static Logger logger = new Logger(); 
+		static Logger logger = new Logger(new LoggerSettings()); 
 
 		public static void Start(){
-
+			logger.start (); 
 		}
 		public static void Stop(){
+			logger.stop (); 
+		}
 
-
+		public static void applySettings(LoggerSettings settings){
+			logger.applySettings (settings);
 		}
 
 		#region Public Logging Methods
@@ -51,7 +51,7 @@ namespace MercuryLogger
 			debug (tag, String.Format (message, args)); 
 		}
 		public static void debug(string tag, Exception exception, string message){
-			addLogEntry (LogLevel.DEBUG, tag, exception, message);
+			addLogEntry (LogLevel.DEBUG, tag, message,exception);
 		}
 		public static void debug(string tag, Exception exception, string message, params string[] args){
 			debug (tag, exception, String.Format (message, args)); 

@@ -1,11 +1,11 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Logger.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="LogEntry.cs">
     <Files>
-      <File FileName="Log.cs" Line="104" Column="14" />
+      <File FileName="Log.cs" Line="27" Column="27" />
       <File FileName="LogLevel.cs" Line="11" Column="12" />
-      <File FileName="LogEntry.cs" Line="21" Column="3" />
-      <File FileName="Logger.cs" Line="88" Column="5" />
+      <File FileName="LogEntry.cs" Line="48" Column="34" />
+      <File FileName="Logger.cs" Line="96" Column="6" />
       <File FileName="LoggerSettings.cs" Line="22" Column="3" />
     </Files>
   </MonoDevelop.Ide.Workbench>
