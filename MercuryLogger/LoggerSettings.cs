@@ -9,6 +9,7 @@ namespace MercuryLogger
 		public bool LogToStdOut { get; set; }
 		public LogLevel HighestLevelToStdOut { get; set; }
 		public LogLevel HighestLevelToFile { get; set; }
+		public LogLevel LowestCachedLevel { get; set; }
 		public int BufferSize { get; set; }
 
 		public LoggerSettings(){
@@ -17,6 +18,7 @@ namespace MercuryLogger
 			this.LogToStdOut = true; 
 			this.HighestLevelToFile = LogLevel.VERBOSE; 
 			this.HighestLevelToStdOut = LogLevel.WARNING;
+			this.LowestCachedLevel = LogLevel.INFO; 
 			this.BufferSize = 10; 
 		}
 

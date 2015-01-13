@@ -12,6 +12,7 @@ namespace MercuryLogger
 		public bool LogToStdOut { get; set; }
 		public LogLevel HighestLevelToStdOut { get; set; }
 		public LogLevel HighestLevelToFile { get; set; }
+		public LogLevel LowestCachedLevel { get; set; }
 		public int BufferSize { get; set; }
 		public bool Running {get{return this.Running;}}
 
@@ -50,9 +51,10 @@ namespace MercuryLogger
 		}
 		public void stop(){
 			if (running) {
+				flush (); 
 				running = false; 
 				doLog.Set (); 
-				if (!loggingThread.Join (1000)) { //TODO: Put in Settings
+				if (!loggingThread.Join (1000)) { 
 					loggingThread.Abort ();
 					loggingThread.Join (100); 
 				}
@@ -62,25 +64,22 @@ namespace MercuryLogger
 		public void log(LogEntry entry){
 			if (this.ImmediateStdOutLogging)
 				Console.WriteLine (entry.ToString ());
-			
+
 			lock (_lock) {
 				Buffer.Enqueue (entry); 
-				if (Buffer.Count >= BufferSize && this.running && !this.active) // Also checking if not currently actively writing to file
+				if ((Buffer.Count >= BufferSize || entry.Level > LowestCachedLevel) && this.running && !this.active) // Also checking if not currently actively writing to file
 					doLog.Set (); 
 			}
 		}
-
 		public void flush(){
 			if (running && !active) {
 				doLog.Set (); 
 			}
 		}
-
 		private void logToStdOut(LogEntry entry){
 			if (entry.Level <= HighestLevelToStdOut)
 				Console.WriteLine (entry.ToString ()); 
 		}
-
 		private void executeLogging(){
 			do {
 				doLog.WaitOne(); 
@@ -103,7 +102,6 @@ namespace MercuryLogger
 				this.active = false; 
 			} while(running); 
 		}
-
 		private bool itemsInQueue(){
 			lock (_lock) {
 				return (Buffer.Count > 0); 

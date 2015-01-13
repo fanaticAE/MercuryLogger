@@ -12,6 +12,7 @@ namespace MercuryLogger
 		public static bool LogToStdOut { get{ return logger.LogToStdOut; } set{ logger.LogToStdOut = value; } }
 		public static LogLevel HighestLevelToStdOut { get{ return logger.HighestLevelToStdOut; } set{ logger.HighestLevelToStdOut = value; } }
 		public static LogLevel HighestLevelToFile { get{ return logger.HighestLevelToFile; } set{ logger.HighestLevelToFile = value; } }
+		public static LogLevel LowestCachedLevel { get{ return logger.LowestCachedLevel; } set{ logger.LowestCachedLevel = value; } }
 		public static int BufferSize { get{ return logger.BufferSize; } set{ logger.BufferSize =value; } }
 		public static bool Running{ get { return logger.Running; } }
 
