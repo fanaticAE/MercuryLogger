@@ -1,5 +1,0 @@
-/home/rainer/Projekte/MercuryLogger/MercuryLogger/obj/Debug/.NETFramework,Version=v4.0.AssemblyAttribute.cs
-/home/rainer/Projekte/MercuryLogger/MercuryLogger/bin/Debug/MercuryLogger.dll.mdb
-/home/rainer/Projekte/MercuryLogger/MercuryLogger/bin/Debug/MercuryLogger.dll
-/home/rainer/Projekte/MercuryLogger/MercuryLogger/obj/Debug/MercuryLogger.dll
-/home/rainer/Projekte/MercuryLogger/MercuryLogger/obj/Debug/MercuryLogger.dll.mdb

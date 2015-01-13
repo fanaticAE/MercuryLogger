@@ -35,65 +35,65 @@ namespace MercuryLogger
 			addLogEntry (LogLevel.VERBOSE, tag, message); 
 
 		}
-		public static void verbose(string tag, string message, params string[] args){
+		public static void verbose(string tag, string message, params object[] args){
 			verbose (tag, String.Format (message, args)); 
 		}
 		public static void verbose(string tag, Exception exception, string message){
 			addLogEntry (LogLevel.VERBOSE, tag, message, exception);
 		}
-		public static void verbose(string tag, Exception exception, string message, params string[] args){
+		public static void verbose(string tag, Exception exception, string message, params object[] args){
 			verbose (tag, exception, String.Format (message, args)); 
 		}
 
 		public static void debug(string tag, string message){	
 			addLogEntry (LogLevel.DEBUG, tag, message); 
 		}
-		public static void debug(string tag, string message, params string[] args){
+		public static void debug(string tag, string message, params object[] args){
 			debug (tag, String.Format (message, args)); 
 		}
 		public static void debug(string tag, Exception exception, string message){
 			addLogEntry (LogLevel.DEBUG, tag, message,exception);
 		}
-		public static void debug(string tag, Exception exception, string message, params string[] args){
+		public static void debug(string tag, Exception exception, string message, params object[] args){
 			debug (tag, exception, String.Format (message, args)); 
 		}
 
 		public static void info(string tag, string message){
 			addLogEntry (LogLevel.INFO, tag, message); 
 		}
-		public static void info(string tag, string message, params string[] args){
+		public static void info(string tag, string message, params object[] args){
 			info (tag, String.Format (message, args)); 
 		}
 		public static void info(string tag, Exception exception, string message){
 			addLogEntry (LogLevel.INFO, tag, message, exception); 
 		}
-		public static void info(string tag, Exception exception, string message, params string[] args){
+		public static void info(string tag, Exception exception, string message, params object[] args){
 			info (tag, exception, String.Format (message, args)); 
 		}
 
 		public static void warning(string tag, string message){
 			addLogEntry (LogLevel.WARNING,tag, message); 
 		}
-		public static void warning(string tag, string message, params string[] args){
+		public static void warning(string tag, string message, params object[] args){
 			warning (tag, String.Format (message, args)); 
 		}
 		public static void warning(string tag,Exception exception, string message){
 			addLogEntry (LogLevel.WARNING, tag, message, exception); 
 		}
-		public static void warning(string tag, Exception exception, string message, params string[] args){
+		public static void warning(string tag, Exception exception, string message, params object[] args){
 			warning (tag, exception, string.Format (message, args)); 
 		}
 
 		public static void error(string tag, string message){
 			addLogEntry (LogLevel.ERROR, tag, message); 
 		}
-		public static void error(string tag, string message, params string[] args){
+		public static void error(string tag, string message, params object[] args){
 			error (tag, String.Format (message, args)); 
 		}
 		public static void error(string tag, Exception exception, string message){
 			addLogEntry (LogLevel.ERROR, tag, message, exception); 
 		}
-		public static void error(string tag, Exception exception, string message, params string[] args){
+		public static void error(string tag, Exception exception, string message, params object[] args){
 			error (tag, exception, String.Format (message, args)); 
 		}
 		#endregion
