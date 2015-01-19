@@ -53,11 +53,13 @@ namespace MercuryLogger
 			if (running) {
 				flush (); 
 				running = false; 
-				doLog.Set (); 
-				if (!loggingThread.Join (1000)) { 
-					loggingThread.Abort ();
-					loggingThread.Join (100); 
-				}
+				if (active) {
+					if (!loggingThread.Join (1000)) { 
+						loggingThread.Abort ();
+						loggingThread.Join (100); 
+					}
+				} else
+					executeLogging (); 
 			}
 		}
 
