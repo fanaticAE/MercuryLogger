@@ -35,7 +35,7 @@ namespace MercuryLogger
 			sb.Append ("@"); 
 			sb.Append (DateTime.ToString ("O")); 
 			sb.Append ("~"); 
-			sb.AppendFormat ("[{0}]:{1}" + Environment.NewLine ,Tag,Message); 
+			sb.AppendFormat ("[{0}]:{1}",Tag,Message); 
 			if (Exception != null)
 				sb.AppendLine (getExceptionString (Exception)); 
 			return sb.ToString (); 
@@ -45,8 +45,10 @@ namespace MercuryLogger
 			StringBuilder sb = new StringBuilder (); 
 			sb.AppendLine (ex.ToString ());
 			sb.AppendLine ("Message: " + ex.Message); 
-			if(ex.InnerException != null) sb.AppendLine ("Inner: " + ex.InnerException.ToString()); 
-			sb.AppendLine (ex.StackTrace); 
+			if (ex.InnerException != null) {
+				sb.AppendLine ("Inner: " + ex.InnerException.ToString ()); 
+				sb.AppendLine (ex.StackTrace);
+			}
 			return sb.ToString ();
 		}
 			

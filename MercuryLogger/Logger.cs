@@ -53,13 +53,11 @@ namespace MercuryLogger
 			if (running) {
 				flush (); 
 				running = false; 
-				if (active) {
 					if (!loggingThread.Join (1000)) { 
 						loggingThread.Abort ();
 						loggingThread.Join (100); 
 					}
-				} else
-					executeLogging (); 
+				logToFile (); 
 			}
 		}
 
@@ -82,28 +80,6 @@ namespace MercuryLogger
 			if (entry.Level <= HighestLevelToStdOut)
 				Console.WriteLine (entry.ToString ()); 
 		}
-		private void executeLogging(){
-			do {
-				doLog.WaitOne(); 
-				this.active = true; 
-
-				//...
-				List<string> writeBuffer = new List<string>(); 
-				while(itemsInQueue()){
-					LogEntry entry = getNextEntry(); 
-
-					if(entry.Level <= HighestLevelToFile)
-						writeBuffer.Add(entry.ToString()); 
-
-					if(!ImmediateStdOutLogging && LogToStdOut)
-						logToStdOut(entry); 
-				}
-				File.WriteAllLines(FilePath,writeBuffer); 
-				//...
-
-				this.active = false; 
-			} while(running); 
-		}
 		private bool itemsInQueue(){
 			lock (_lock) {
 				return (Buffer.Count > 0); 
@@ -114,7 +90,31 @@ namespace MercuryLogger
 				return Buffer.Dequeue (); 
 			}
 		}
+		private void logToFile(){
+			List<string> writeBuffer = new List<string>(); 
+			while(itemsInQueue()){
+				LogEntry entry = getNextEntry(); 
 
+				if(entry.Level <= HighestLevelToFile)
+					writeBuffer.Add(entry.ToString()); 
+
+				if(!ImmediateStdOutLogging && LogToStdOut)
+					logToStdOut(entry); 
+			}
+			File.AppendAllLines(FilePath,writeBuffer); 
+		}
+		private void executeLogging(){
+			do {
+				doLog.WaitOne(); 
+				this.active = true; 
+
+				//...
+				logToFile(); 
+				//...
+
+				this.active = false; 
+			} while(running); 
+		}
 
 	}
 }

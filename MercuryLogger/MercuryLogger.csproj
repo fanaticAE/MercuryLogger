@@ -7,8 +7,6 @@
     <OutputType>Library</OutputType>
     <RootNamespace>MercuryLogger</RootNamespace>
     <AssemblyName>MercuryLogger</AssemblyName>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -30,6 +28,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="nunit.framework" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -38,6 +37,10 @@
     <Compile Include="LogEntry.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="LoggerSettings.cs" />
+    <Compile Include="Tests\LogTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Folder Include="Tests\" />
+  </ItemGroup>
 </Project>
